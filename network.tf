@@ -24,8 +24,11 @@ resource "aws_route_table_association" "gateway_subnet" {
   route_table_id = aws_route_table.second_rt.id
 }
 
+// count = 0: creation disabled because packer can manage the security group
 resource "aws_security_group" "packer-allowed" {
   vpc_id = aws_vpc.packer.id
+
+  count = 0
 
   egress {
     from_port   = 0
